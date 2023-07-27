@@ -14,8 +14,10 @@ const Header = () => {
     dispatch(logOut());
     toast.success("Log out succesfuly");
   };
+ const ADMIN_EMAIL = "ecom@site.com"
   const selector = useSelector((state) => state);
-  console.log(selector);
+  console.log(selector.user.email);
+  console.log(ADMIN_EMAIL);
   return (
     <header className="fixed shadow-md w-full h-16 px-2 md:px-4 z-50 bg-white">
       <div className="flex items-center h-full justify-between">
@@ -56,14 +58,20 @@ const Header = () => {
             </div>
             {showMenu && (
               <div className="absolute right-2 bg-white overflow-hidden drop-shadow-md p-1">
-                <Link
-                  to={"newproduct"}
-                  className="whitespace-nowrap cursor-pointer"
-                >
-                  New Product
-                </Link>
+                {
+                  userData.email === ADMIN_EMAIL &&  <Link
+                    to={"newproduct"}
+                    className=
+                    "whitespace-nowrap cursor-pointer"
+                  >
+                    New Product
+                  </Link> 
+                }
+                 
+              
+
                 <br></br>
-                {userData.image ? (
+                {userData.name ? (
                   <Link
                     onClick={handelLogout}
                     className="whitespace-nowrap cursor-pointer"

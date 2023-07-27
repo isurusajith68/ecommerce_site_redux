@@ -87,7 +87,10 @@ app.post("/product", async (req, res) => {
   res.send({ message: "Product Added", alert: true, data: saveProduct });
 });
 
-
+app.get("/product", async (req, res) => {
+  const findProduct = await productModel.find().exec();
+  res.send(findProduct);
+});
 
 app.listen(port, () => {
   console.log(`server is running ${port}`);
