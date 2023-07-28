@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useRef } from "react";
 import pngegg from "../assest/pngegg.png";
 import { useSelector } from "react-redux";
 import HomeCart from "../components/HomeCart";
 import CardReature from "../components/CardReature";
-
+import { MdNavigateBefore, MdNavigateNext } from "react-icons/md";
 const Home = () => {
   const productData = useSelector((state) => state.product.product);
   console.log(productData);
@@ -13,14 +13,24 @@ const Home = () => {
     (el, index) => el.category === "Vegitable"
   );
 
-  
   const loardingArray = new Array(4).fill(0);
+  const loardingArrayVegi = new Array(10).fill(0);
+
+  //scroll products card
+
+  const scrollLeftRef = useRef();
+  const NavigateBefore = () => {
+    scrollLeftRef.current.scrollLeft += 200;
+  };
+  const NavigateNext = () => {
+    scrollLeftRef.current.scrollLeft -= 100;
+  };
 
   return (
-    <div className="p-2 md:p-4">
+    <div className="p-2 md:p-4 ">
       <div className="md:flex ">
         <div className="md:w-1/2 flex flex-col">
-          <div className="flex gap-2 bg-red-400 w-[130px] rounded-full p-1 shadow drop-shadow mt-1">
+          <div className="flex gap-2 bg-red-500 w-[130px] rounded-full p-1 shadow drop-shadow mt-1 border-2 border-white">
             <p className="font-medium text-[12px] text-white">Bike Delivery</p>
             <img src={pngegg} alt="" className="h-5 w-8" />
           </div>
@@ -58,23 +68,44 @@ const Home = () => {
               })}
         </div>
       </div>
-      <div>
-        <h2 className="text-2xl  md:text-4xl font-bold pt-3 text-center">
+      <div className="flex w-full items-center ">
+        <h2 className="font-bold text-2xl mb-1 mt-2 text-slate-800">
           Fress Vegitable
         </h2>
-        <div className="flex gap-4 p-4 md:p-6">
-          {homeProductCartFreshVegitable.map((el) => {
-            return (
-              <CardReature
-                key={el._id}
-                image={el.image}
-                name={el.name}
-                price={el.price}
-                category={el.category}
-              />
-            );
-          })}
+        <div className="ml-auto flex gap-4 ">
+          <button
+            onClick={NavigateNext}
+            className="bg-red-500 text-white hover:bg-red-600 border-2 border-white text-lg rounded-full "
+          >
+            <MdNavigateBefore />
+          </button>
+          <button
+            onClick={NavigateBefore}
+            className="bg-red-500 text-white hover:bg-red-600 border-2 border-white text-lg rounded-full "
+          >
+            <MdNavigateNext />
+          </button>
         </div>
+      </div>
+      <div
+        ref={scrollLeftRef}
+        className="flex gap-4 p-4 md:p-6 overflow-scroll scrollbar-none scroll-smooth transition-all"
+      >
+        {homeProductCartFreshVegitable[0]
+          ? homeProductCartFreshVegitable.map((el) => {
+              return (
+                <CardReature
+                  key={el._id}
+                  image={el.image}
+                  name={el.name}
+                  price={el.price}
+                  category={el.category}
+                />
+              );
+            })
+          : loardingArrayVegi.map((el, index) => {
+              return <CardReature key={index} />;
+            })}
       </div>
     </div>
   );

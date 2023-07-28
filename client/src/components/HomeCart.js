@@ -2,10 +2,10 @@ import React from "react";
 
 const HomeCart = ({ name, image, price, category }) => {
   return (
-    <div className="bg-white rounded p-1 min-w-[172px] shadow-md h-52 ">
+    <div className="bg-white rounded  min-w-[172px] shadow-md h-52 ">
       {name ? (
         <>
-          <div className="w-40 ">
+          <div className="w-44 p-1">
             <img src={image} alt="" className="h-full w-full border-none " />
           </div>
           <h3 className="font-semibold text-slate-600 text-center capitalize text-lg">
