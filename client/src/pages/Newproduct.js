@@ -47,6 +47,7 @@ const Newproduct = () => {
         },
         body: JSON.stringify(data),
       });
+      console.log(product)
       toast.success("Saved Product");
 
       setData(() => {
@@ -62,6 +63,8 @@ const Newproduct = () => {
       toast.error("Enter required field");
     }
   };
+
+  
   return (
     <div className="p-4">
       {" "}

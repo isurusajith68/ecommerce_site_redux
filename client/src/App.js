@@ -3,22 +3,19 @@ import "./App.css";
 import Header from "./components/Header";
 import { Toaster } from "react-hot-toast";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addProduct } from "./redux/productSlice";
 
 function App() {
   const dispatch = useDispatch();
-  const productData = useSelector((state)=>state.product.product);
 
-  console.log(productData);
-  
   useEffect(() => {
     (async () => {
       const res = await fetch(`${process.env.REACT_APP_SERVER}/product`);
       const data = await res.json();
       dispatch(addProduct(data));
     })();
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

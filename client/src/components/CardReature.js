@@ -1,24 +1,33 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const CardReature = ({ name, image, price, category }) => {
+const CardReature = ({ _id, name, image, price, category }) => {
   return (
-    <div className=" min-w-[220px] bg-white hover:shadow-lg drop-shadow-lg cursor-pointer overflow-hidden">
+    <div className=" min-w-[260px] max-w-[260px]  bg-white hover:shadow-lg drop-shadow-lg cursor-pointer overflow-hidden">
       {name ? (
-        <div className=" p-2">
-          <div className="h-36">
-            <img src={image} alt="" className="h-full" />
+        <Link to={`/menu/${_id}` } onClick={()=>{
+          window.scrollTo({top:0 , behavior:"smooth"})
+        }}>
+          <div className=" p-2">
+            <div className="h-36 ">
+              <img src={image} alt="" className="h-full" />
+            </div>
+
+            <h3 className="overflow-hidden mt-2 font-semibold text-slate-600 capitalize text-lg whitespace-nowrap">
+              {name}
+            </h3>
+            <p className=" ">{category}</p>
+            <p className=" text-red-400">
+              Rs: <span className="text-black">{price}</span>
+            </p>
+            <div className="flex w-full items-center justify-center">
+
+            <button className="bg-red-500 text-white rounded-full px-6 py-1 mt-2 hover:bg-red-600 items-center justify-center ">
+              Add to Cart
+            </button>
+            </div>
           </div>
-          <h3 className="overflow-hidden mt-2 font-semibold text-slate-600 capitalize text-lg whitespace-nowrap">
-            {name}
-          </h3>
-          <p className=" ">{category}</p>
-          <p className=" text-red-400">
-            Rs: <span className="text-black">{price}</span>
-          </p>
-          <button className="bg-red-500 text-white rounded-full px-6 py-1 mt-2 hover:bg-red-600">
-            Add to Cart
-          </button>
-        </div>
+        </Link>
       ) : (
         <div
           role="status"

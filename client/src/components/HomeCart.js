@@ -1,21 +1,24 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const HomeCart = ({ name, image, price, category }) => {
+const HomeCart = ({ _id,name, image, price, category }) => {
   return (
     <div className="bg-white rounded  min-w-[172px] shadow-md h-52 ">
       {name ? (
-        <>
-          <div className="w-44 p-1">
-            <img src={image} alt="" className="h-full w-full border-none " />
-          </div>
-          <h3 className="font-semibold text-slate-600 text-center capitalize text-lg">
-            {name}
-          </h3>
-          <p className="text-center ">{category}</p>
-          <p className="text-center text-red-400">
-            Rs: <span className="text-black">{price}</span>
-          </p>
-        </>
+        <Link to={`menu/${_id}`}>
+          <>
+            <div className="w-44 p-1">
+              <img src={image} alt="" className="h-full w-full border-none " />
+            </div>
+            <h3 className="font-semibold text-slate-600 text-center capitalize text-lg">
+              {name}
+            </h3>
+            <p className="text-center ">{category}</p>
+            <p className="text-center text-red-400">
+              Rs: <span className="text-black">{price}</span>
+            </p>
+          </>
+        </Link>
       ) : (
         <div
           role="status"

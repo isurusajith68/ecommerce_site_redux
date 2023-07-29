@@ -15,9 +15,7 @@ const Header = () => {
     toast.success("Log out succesfuly");
   };
  const ADMIN_EMAIL = "ecom@site.com"
-  const selector = useSelector((state) => state);
-  console.log(selector.user.email);
-  console.log(ADMIN_EMAIL);
+ 
   return (
     <header className="fixed shadow-md w-full h-16 px-2 md:px-4 z-50 bg-white">
       <div className="flex items-center h-full justify-between">
@@ -58,17 +56,14 @@ const Header = () => {
             </div>
             {showMenu && (
               <div className="absolute right-2 bg-white overflow-hidden drop-shadow-md p-1">
-                {
-                  userData.email === ADMIN_EMAIL &&  <Link
+                {userData.email === ADMIN_EMAIL && (
+                  <Link
                     to={"newproduct"}
-                    className=
-                    "whitespace-nowrap cursor-pointer"
+                    className="whitespace-nowrap cursor-pointer"
                   >
                     New Product
-                  </Link> 
-                }
-                 
-              
+                  </Link>
+                )}
 
                 <br></br>
                 {userData.name ? (
@@ -81,11 +76,17 @@ const Header = () => {
                 ) : (
                   <Link
                     to={"login"}
-                    className="whitespace-nowrap cursor-pointer"
+                    className="whitespace-nowrap cursor-pointer p-1"
                   >
                     Login
                   </Link>
                 )}
+                <nav className="   text-base md:text-lg flex flex-col gap-1 mt-1 px-1 md:hidden">
+                  <Link to={""}>Home</Link>
+                  <Link to={"menu"}>Menu</Link>
+                  <Link to={"about"}>About</Link>
+                  <Link to={"contact"}>Contact</Link>
+                </nav>
               </div>
             )}
           </div>{" "}
