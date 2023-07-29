@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const HomeCart = ({ _id,name, image, price, category }) => {
   return (
-    <div className="bg-white rounded  min-w-[172px] shadow-md h-52 ">
+    <div className="bg-white rounded  min-w-[172px] shadow-md h-[202px] ">
       {name ? (
         <Link to={`menu/${_id}`}>
           <>
@@ -22,11 +22,11 @@ const HomeCart = ({ _id,name, image, price, category }) => {
       ) : (
         <div
           role="status"
-          class="min-w-[180px] p-4 border rounded shadow animate-pulse md:p-6 "
+          className="min-w-[180px] p-3 border rounded shadow animate-pulse md:p-6 "
         >
-          <div class="flex items-center justify-center h-[110px] mb-4 bg-gray-400 rounded ">
+          <div className="flex items-center justify-center h-[110px] mb-4 bg-gray-400 rounded ">
             <svg
-              class="w-10 h-10 text-gray-200"
+              className="w-10 h-10 text-gray-200"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
@@ -36,8 +36,8 @@ const HomeCart = ({ _id,name, image, price, category }) => {
               <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z" />
             </svg>
           </div>
-          <div class="h-2.5 bg-gray-200 rounded-full "></div>
-          <div class="h-2 bg-gray-200 rounded-full mt-2"></div>
+          <div className="h-2.5 bg-gray-200 rounded-full "></div>
+          <div className="h-2 bg-gray-200 rounded-full mt-2"></div>
         </div>
       )}
     </div>

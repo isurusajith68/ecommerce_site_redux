@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import AllProduct from "../components/AllProduct";
+import { addCart } from "../redux/productSlice";
 
 const Menu = () => {
   const { filterProduct } = useParams();
@@ -10,7 +11,13 @@ const Menu = () => {
 
   const [filterData, setFilterData] = useState([]);
   const selectedData = filterData[0];
-  console.log(selectedData);
+ 
+  const dispatch = useDispatch();
+
+  const cartAdd = () => {
+   dispatch(addCart(selectedData));
+  }
+
   useEffect(() => {
     if (filterProduct) {
       const filterData = data.filter((el) => el._id === filterProduct);
@@ -45,7 +52,10 @@ const Menu = () => {
             <span className="text-blue-500 "> {selectedData?.description}</span>
           </h1>
           <div className="flex w-full items-center justify-center gap-4 mt-2">
-            <button className="p-2  bg-red-500 rounded-full text-white border-2 hover:bg-red-600 px-4 min-w-[150px]">
+            <button
+              onClick={cartAdd}
+              className="p-2  bg-red-500 rounded-full text-white border-2 hover:bg-red-600 px-4 min-w-[150px]"
+            >
               Add to Cart
             </button>
             <button className="p-2  bg-red-500 rounded-full text-white border-2 hover:bg-red-600 px-4 min-w-[150px]">

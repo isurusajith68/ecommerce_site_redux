@@ -16,6 +16,8 @@ const Header = () => {
   };
  const ADMIN_EMAIL = "ecom@site.com"
  
+ const cartLength = useSelector((state) => state.product.cart.length);
+
   return (
     <header className="fixed shadow-md w-full h-16 px-2 md:px-4 z-50 bg-white">
       <div className="flex items-center h-full justify-between">
@@ -27,15 +29,17 @@ const Header = () => {
         <div className="flex items-center gap-4 md:gap-7 ">
           <nav className=" md:flex gap-4 md:gap-6 text-base md:text-lg hidden">
             <Link to={""}>Home</Link>
-            <Link to={"menu"}>Menu</Link>
+            {/* <Link to={"menu"}>Menu</Link> */}
             <Link to={"about"}>About</Link>
             <Link to={"contact"}>Contact</Link>
           </nav>
           <div className="text-2xl relative">
-            <BsCartDashFill />
-            <div className="absolute -top-2 -right-1 text-white bg-red-500 h-5 w-4 rounded-full m-0 p-0 text-sm text-center items-center ">
-              0
-            </div>
+            <Link to={"cart"}>
+              <BsCartDashFill />
+              <div className="-top-2 -right-2 absolute flex items-center justify-center bg-red-500 h-4 w-4 rounded-full">
+                <span className="text-[10px] text-white">{cartLength}</span>
+              </div>
+            </Link>
           </div>
           <div
             className="cursor-pointer "
@@ -83,7 +87,7 @@ const Header = () => {
                 )}
                 <nav className="   text-base md:text-lg flex flex-col gap-1 mt-1 px-1 md:hidden">
                   <Link to={""}>Home</Link>
-                  <Link to={"menu"}>Menu</Link>
+                  {/* <Link to={"menu"}>Menu</Link> */}
                   <Link to={"about"}>About</Link>
                   <Link to={"contact"}>Contact</Link>
                 </nav>

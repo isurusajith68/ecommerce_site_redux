@@ -1,14 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { addCart } from "../redux/productSlice";
+import { useDispatch } from "react-redux";
 
 const CardReature = ({ _id, name, image, price, category }) => {
+  const dispatch = useDispatch();
+
+  const handleCart = (e) => {
+    e.stopPropagation();
+    dispatch(addCart({ _id, name, image, price, category }));
+  };
+
   return (
-    <div className=" min-w-[260px] max-w-[260px]  bg-white hover:shadow-lg drop-shadow-lg cursor-pointer overflow-hidden">
+    <div className="min-w-[260px] max-w-[260px]  bg-white hover:shadow-lg drop-shadow-lg cursor-pointer overflow-hidden">
       {name ? (
-        <Link to={`/menu/${_id}` } onClick={()=>{
-          window.scrollTo({top:0 , behavior:"smooth"})
-        }}>
-          <div className=" p-2">
+        <div className=" p-2">
+          <Link
+            to={`/menu/${_id}`}
+            onClick={() => {
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+          >
             <div className="h-36 ">
               <img src={image} alt="" className="h-full" />
             </div>
@@ -20,22 +32,24 @@ const CardReature = ({ _id, name, image, price, category }) => {
             <p className=" text-red-400">
               Rs: <span className="text-black">{price}</span>
             </p>
-            <div className="flex w-full items-center justify-center">
-
-            <button className="bg-red-500 text-white rounded-full px-6 py-1 mt-2 hover:bg-red-600 items-center justify-center ">
+          </Link>
+          <div className="flex w-full items-center justify-center">
+            <button
+              onClick={handleCart}
+              className="bg-red-500 text-white rounded-full px-6 py-1 mt-2 hover:bg-red-600 items-center justify-center "
+            >
               Add to Cart
             </button>
-            </div>
           </div>
-        </Link>
+        </div>
       ) : (
         <div
           role="status"
-          class="min-w-[200px] p-4 border rounded shadow animate-pulse md:p-6 "
+          className="min-w-[200px] p-4 border rounded shadow animate-pulse md:p-6 "
         >
-          <div class="flex items-center justify-center h-[110px] mb-4 bg-gray-400 rounded ">
+          <div className="flex items-center justify-center h-[110px] mb-4 bg-gray-400 rounded ">
             <svg
-              class="w-10 h-10 text-gray-200"
+              className="w-10 h-10 text-gray-200"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
@@ -45,8 +59,8 @@ const CardReature = ({ _id, name, image, price, category }) => {
               <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z" />
             </svg>
           </div>
-          <div class="h-2.5 bg-gray-200 rounded-full "></div>
-          <div class="h-2 bg-gray-200 rounded-full mt-2"></div>
+          <div className="h-2.5 bg-gray-200 rounded-full "></div>
+          <div className="h-2 bg-gray-200 rounded-full mt-2"></div>
         </div>
       )}
     </div>
