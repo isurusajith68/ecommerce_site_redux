@@ -49,7 +49,7 @@ const CartCard = ({ id, name, image, price, quantity, total, category }) => {
             </p>
           </div>
           <div className="w-2/8 bg-red-500 h-2/8 p-1 rounded-full text-white m-auto ">
-            <span className="flex justify-center m-auto items-center">
+            <span className="flex justify-center m-auto items-center hover:bg-red-600 cursor-pointer">
               <AiFillDelete
                 onClick={() => {
                   dispathch(deleteCart(id));

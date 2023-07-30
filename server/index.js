@@ -1,13 +1,15 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
-
+const dotenv = require("dotenv");
 const app = express();
+const stripe = require("stripe");
 app.use(cors());
+dotenv.config();
 app.use(express.json({ limit: "10mb" }));
 
 const port = 5000;
-
+// console.log(process.env.Stripe_Secret_key);
 //mongo Db
 mongoose.set("strictQuery", false);
 mongoose
@@ -90,6 +92,54 @@ app.post("/product", async (req, res) => {
 app.get("/product", async (req, res) => {
   const findProduct = await productModel.find().exec();
   res.send(findProduct);
+});
+
+//payment section
+
+app.post("/payment", async (req, res) => {
+  const data = req.body;
+
+  try {
+    const parms = {
+      submit_type: "pay",
+      mode: "payment",
+      payment_method_types: ["card"],
+      billing_address_collection: "auto",
+      shipping_options: [
+        {
+          shipping_rate: "shr_1NZObVC05RrpHY1ztkspXq27",
+        },
+      ],
+      line_items: data.cartSelector.map((el) => {
+        return {
+          price_data: {
+            currency: "usd",
+            product_data: {
+              name: el.name,
+              //images: [el.image],
+            },
+            unit_amount: el.price * 100,
+          },
+          adjustable_quantity: {
+            enabled: true,
+            minimum: 1,
+          },
+          quantity: el.qty,
+        };
+      }),
+      success_url: "http://localhost:3000/success",
+      cancel_url: "http://localhost:3000/cancel",
+    };
+    const session = await stripe(
+      process.env.Stripe_Secret_key
+    ).checkout.sessions.create(parms);
+    res.status(200).json({ id: session.id });
+  } catch (error) {
+    res.status(500).json({ message: "Something went wrong" });
+    console.log(error);
+  }
+
+  // console.log(data);
 });
 
 app.listen(port, () => {

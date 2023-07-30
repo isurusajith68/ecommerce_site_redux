@@ -23,7 +23,11 @@ const Header = () => {
       <div className="flex items-center h-full justify-between">
         <Link to="/">
           <div className="h-12">
-            <img src={Logo} className="h-full" alt="" />
+            <img
+              src="https://previews.123rf.com/images/distrologo/distrologo1902/distrologo190200757/117609853-online-shop-logo-design-vector-icon-shopping-logo-design.jpg"
+              className="h-full"
+              alt=""
+            />
           </div>
         </Link>
         <div className="flex items-center gap-4 md:gap-7 ">
